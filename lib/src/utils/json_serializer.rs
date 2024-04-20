@@ -39,6 +39,7 @@ impl JsonPlaylist {
     pub fn new(date: String, start: f64) -> Self {
         let mut media = Media::new(0, "", false);
         media.begin = Some(start);
+        media.title = String::new();
         media.duration = DUMMY_LEN;
         media.out = DUMMY_LEN;
         Self {
@@ -73,6 +74,7 @@ pub fn set_defaults(playlist: &mut JsonPlaylist) {
     for (i, item) in playlist.program.iter_mut().enumerate() {
         item.begin = Some(start_sec);
         item.index = Some(i);
+        item.title = item.title.clone();
         item.last_ad = false;
         item.next_ad = false;
         item.process = Some(true);

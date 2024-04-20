@@ -65,6 +65,7 @@ pub struct Media {
 
     #[serde(skip_serializing, skip_deserializing)]
     pub index: Option<usize>,
+    pub title: String,
     #[serde(rename = "in")]
     pub seek: f64,
     pub out: f64,
@@ -138,6 +139,7 @@ impl Media {
         Self {
             begin: None,
             index: Some(index),
+            title: String::new(),
             seek: 0.0,
             out: duration,
             duration,
@@ -218,7 +220,8 @@ impl Media {
 
 impl PartialEq for Media {
     fn eq(&self, other: &Self) -> bool {
-        self.seek == other.seek
+        self.title == other.title
+            && self.seek == other.seek
             && self.out == other.out
             && self.duration == other.duration
             && self.source == other.source
